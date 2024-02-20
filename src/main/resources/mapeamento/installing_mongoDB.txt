@@ -1,0 +1,12 @@
+//Baixando a imagem
+docker pull tutum/mongodb
+
+//Criando servidor
+docker run -d -p 27017:27017 -p 28017:28017 -e AUTH=no tutum/mongodb
+
+//Descobrindo o id da imagem
+docker ps -a
+
+//Rodando o servidor
+docker start 77b903780b83
+
