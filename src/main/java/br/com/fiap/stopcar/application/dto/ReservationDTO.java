@@ -5,11 +5,11 @@ import java.util.Date;
 
 public record ReservationDTO(
         BigInteger id,
-        String carId,
+        CarDTO car,
         String location,
         Date startDate,
         Date endDate,
         boolean status,
-        String paymentId
+        PaymentDTO payment
 ) {
 }
