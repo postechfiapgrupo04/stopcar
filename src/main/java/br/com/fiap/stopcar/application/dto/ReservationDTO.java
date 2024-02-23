@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.util.Date;
 
 public record ReservationDTO(
-        BigInteger id,
+        String id,
         CarDTO car,
         String location,
         Date startDate,
