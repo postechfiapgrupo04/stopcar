@@ -10,13 +10,8 @@ import java.math.BigInteger;
 
 @Setter
 @Getter
-@Document(collection = "car")
 public class Car {
-
-    @Id
-    private BigInteger _id;
     private String model;
     private String plate;
     private CarType type;
-
 }

@@ -8,23 +8,13 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigInteger;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Setter
 @Getter
-@Document(collection = "payment")
 public class Payment {
-
-    @Id
-    private BigInteger _id;
-
     private Double value;
-
-    private Date paymentDate;
-
+    private LocalDateTime paymentDate;
     private PaymentType paymentType;
-
-    @DBRef(lazy = true)
-    private Reservation reservation;
-
 }
