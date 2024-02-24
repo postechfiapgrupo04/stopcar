@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -46,9 +47,19 @@ public class ReservationService {
 
     public ReservationDTO saveReservation(ReservationDTO reservationDTO) {
         Reservation reservation = modelMapper.map(reservationDTO, Reservation.class);
-        //regra de hora de expiracao
-        reservation.setEndDate(reservation.getStartDate().plusHours(reservationDTO.totalHours()));
+
+        if (reservation.getStartDate() != null) {
+            reservation.setEndDate(reservation.getStartDate().plusHours(reservationDTO.getTotalHours()));
+        }
         return modelMapper.map(reservationRepository.save(reservation), ReservationDTO.class);
     }
+
+    public List<ReservationDTO> getActiveReservations() {
+        return reservationRepository.findAll().stream()
+                .filter(Reservation::isStatus)
+                .map(r -> modelMapper.map(r, ReservationDTO.class))
+                .collect(Collectors.toList());
+    }
+
 
 }

@@ -27,4 +27,8 @@ public class Reservation {
 
     private Payment payment;
     private Car car;
+
+    public Reservation() {
+
+    }
 }
