@@ -8,7 +8,7 @@ public record ReservationDTO(
         CarDTO car,
         String location,
         Date startDate,
-        Date endDate,
+        Long totalHours,
         boolean status,
         PaymentDTO payment
 ) {

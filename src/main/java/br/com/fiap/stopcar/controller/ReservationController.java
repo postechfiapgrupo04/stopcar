@@ -17,11 +17,11 @@ public class ReservationController {
     private ReservationService reservationService;
 
     @GetMapping
-    public ResponseEntity<List<Reservation>> getReservation() {
+    public ResponseEntity<List<ReservationDTO>> getReservation() {
         return ResponseEntity.ok(reservationService.getReservation());
     }
     @PostMapping
-    public ResponseEntity<Reservation> saveReservation(@RequestBody Reservation reservation) {
+    public ResponseEntity<ReservationDTO> saveReservation(@RequestBody ReservationDTO reservation) {
         return ResponseEntity.ok(reservationService.saveReservation(reservation));
     }
 
