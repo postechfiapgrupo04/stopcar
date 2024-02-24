@@ -1,11 +1,15 @@
 package br.com.fiap.stopcar.service;
 
 
+import br.com.fiap.stopcar.application.annotations.AppError;
 import br.com.fiap.stopcar.application.dto.ReservationDTO;
+import br.com.fiap.stopcar.application.exceptions.AppException;
+import br.com.fiap.stopcar.domain.constants.CacheConstants;
 import br.com.fiap.stopcar.domain.entities.Reservation;
 import br.com.fiap.stopcar.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,18 +22,26 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
     ModelMapper modelMapper = new ModelMapper();
 
-    public List<ReservationDTO> getReservation() {
+    @AppError
+    @Cacheable(value = CacheConstants.FIND_ALL_RESERVATIONS)
+    public List<ReservationDTO> getReservation() throws AppException {
         List<ReservationDTO> reservation = reservationRepository.findAll()
                 .stream()
                 .map(R -> modelMapper.map(R, ReservationDTO.class))
                 .toList();
+        if(reservation.isEmpty()) {
+            throw new AppException("Não existem reservas a serem listadas");
+        }
         return reservation;
     }
 
-    public ReservationDTO findById(String id) {
+    @AppError
+    public ReservationDTO findById(String id) throws AppException {
         Optional<Reservation> reservation = reservationRepository.findById(id);
-        Reservation reservation1 = reservation.orElseThrow(() -> new RuntimeException("Reserva inexistente"));
-        return modelMapper.map(reservation1, ReservationDTO.class);
+        if(reservation.isEmpty()) {
+            throw new AppException("Não existe uma reserva com o id informado");
+        }
+        return modelMapper.map(reservation.get(), ReservationDTO.class);
     }
 
     public ReservationDTO saveReservation(ReservationDTO reservationDTO) {
