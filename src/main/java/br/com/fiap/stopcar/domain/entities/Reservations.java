@@ -1,21 +1,20 @@
 package br.com.fiap.stopcar.domain.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.cglib.core.Local;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.math.BigInteger;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Date;
 
 @Getter
 @Setter
 @Document(collection = "reservation")
-public class Reservation {
+@NoArgsConstructor
+@AllArgsConstructor
+public class Reservations {
 
     @Id
     private String id;
@@ -25,10 +24,6 @@ public class Reservation {
     private boolean status;
     private Long totalHours;
 
-    private Payment payment;
-    private Car car;
-
-    public Reservation() {
-
-    }
+    private Payments payment;
+    private Cars car;
 }
