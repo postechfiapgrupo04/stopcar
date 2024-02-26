@@ -2,9 +2,7 @@ package br.com.fiap.stopcar.controller;
 
 import br.com.fiap.stopcar.application.dto.ReservationDTO;
 import br.com.fiap.stopcar.application.exceptions.AppException;
-import br.com.fiap.stopcar.domain.entities.Reservation;
 import br.com.fiap.stopcar.service.ReservationService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

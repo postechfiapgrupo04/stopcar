@@ -6,6 +6,7 @@ import br.com.fiap.stopcar.application.dto.ReservationDTO;
 import br.com.fiap.stopcar.application.exceptions.AppException;
 import br.com.fiap.stopcar.domain.constants.CacheConstants;
 import br.com.fiap.stopcar.domain.entities.Reservation;
+import br.com.fiap.stopcar.domain.mapper.ReservationMapper;
 import br.com.fiap.stopcar.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -22,12 +23,14 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
     ModelMapper modelMapper = new ModelMapper();
 
+    private final ReservationMapper reservationMapper;
+
     @AppError
     @Cacheable(value = CacheConstants.FIND_ALL_RESERVATIONS)
     public List<ReservationDTO> getReservation() throws AppException {
         List<ReservationDTO> reservation = reservationRepository.findAll()
                 .stream()
-                .map(R -> modelMapper.map(R, ReservationDTO.class))
+                .map(reservationMapper::toReservationDTO)
                 .toList();
         if(reservation.isEmpty()) {
             throw new AppException("Não existem reservas a serem listadas");
