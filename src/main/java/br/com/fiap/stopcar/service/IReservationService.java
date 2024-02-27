@@ -1,5 +1,6 @@
 package br.com.fiap.stopcar.service;
 
+import br.com.fiap.stopcar.application.dto.ReservationCheckedDTO;
 import br.com.fiap.stopcar.application.dto.ReservationDTO;
 import br.com.fiap.stopcar.application.exceptions.AppException;
 
@@ -10,4 +11,5 @@ public interface IReservationService {
     public ReservationDTO findById(String id) throws AppException;
     public ReservationDTO saveReservation(ReservationDTO reservationDTO);
     public List<ReservationDTO> getActiveReservations();
+    public ReservationCheckedDTO getReservationChecked(String id) throws AppException;
 }

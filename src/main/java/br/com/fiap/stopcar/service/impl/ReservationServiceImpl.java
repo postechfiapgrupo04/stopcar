@@ -2,6 +2,7 @@ package br.com.fiap.stopcar.service.impl;
 
 
 import br.com.fiap.stopcar.application.annotations.AppError;
+import br.com.fiap.stopcar.application.dto.ReservationCheckedDTO;
 import br.com.fiap.stopcar.application.dto.ReservationDTO;
 import br.com.fiap.stopcar.application.exceptions.AppException;
 import br.com.fiap.stopcar.domain.constants.CacheConstants;
@@ -10,14 +11,17 @@ import br.com.fiap.stopcar.domain.mapper.ReservationMapper;
 import br.com.fiap.stopcar.repository.ReservationRepository;
 import br.com.fiap.stopcar.service.IReservationService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ReservationServiceImpl implements IReservationService {
 
     private final ReservationRepository reservationRepository;
@@ -39,9 +43,7 @@ public class ReservationServiceImpl implements IReservationService {
 
     @AppError
     public ReservationDTO findById(String id) throws AppException {
-        return reservationMapper
-                .toReservationDTO(reservationRepository.findById(id)
-                        .orElseThrow(() -> new AppException("Não existe uma reserva com o id informado")));
+        return reservationMapper.toReservationDTO(findReservationByIdOrThrows(id));
     }
 
     public ReservationDTO saveReservation(ReservationDTO reservationDTO) {
@@ -60,4 +62,24 @@ public class ReservationServiceImpl implements IReservationService {
                 .collect(Collectors.toList());
     }
 
+    public ReservationCheckedDTO getReservationChecked(String id) throws AppException {
+        Reservations reservationValidate = validateCheckedReservation(findReservationByIdOrThrows(id));
+        return reservationMapper.toReservationCheckedDTO(reservationValidate);
+    }
+
+    private Reservations validateCheckedReservation(final Reservations reservations) {
+        LocalDateTime now = LocalDateTime.now();
+        if (reservations.isStatus() && now.isAfter(reservations.getEndDate())) {
+            reservations.setStatus(false);
+            reservationRepository.save(reservations);
+            log.info("reserva {}, do carro {} validada.",
+                    reservations.getId(), reservations.getCar().getPlate());
+        }
+        return reservations;
+    }
+
+    private Reservations findReservationByIdOrThrows(String id) throws AppException {
+        return reservationRepository.findById(id)
+                .orElseThrow(() -> new AppException("Não existe uma reserva com o id informado"));
+    }
 }

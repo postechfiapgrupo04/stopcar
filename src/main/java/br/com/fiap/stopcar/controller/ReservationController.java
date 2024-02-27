@@ -1,5 +1,6 @@
 package br.com.fiap.stopcar.controller;
 
+import br.com.fiap.stopcar.application.dto.ReservationCheckedDTO;
 import br.com.fiap.stopcar.application.dto.ReservationDTO;
 import br.com.fiap.stopcar.application.exceptions.AppException;
 import br.com.fiap.stopcar.service.impl.ReservationServiceImpl;
@@ -12,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/reservas")
 @RequiredArgsConstructor
-public class ReservationController extends AbstractRestController{
+public class ReservationController extends AbstractRestController {
 
     private final ReservationServiceImpl reservationService;
 
@@ -40,4 +41,8 @@ public class ReservationController extends AbstractRestController{
         return ResponseEntity.ok(reservationService.getActiveReservations());
     }
 
+    @PostMapping("/{id}/check")
+    public ResponseEntity<ReservationCheckedDTO> getReservationChecked(@PathVariable String id) throws AppException {
+        return ResponseEntity.ok(reservationService.getReservationChecked(id));
+    }
 }
