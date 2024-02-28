@@ -78,6 +78,14 @@ public class ReservationServiceImpl implements IReservationService {
         return reservationMapper.toReservationDTO(reservationRepository.save(reservations));
     }
 
+    @Override
+    public List<ReservationDTO> getReservationByCarPlate(String plate) {
+        Query query = new Query(Criteria.where("car.plate").is(plate));
+        List<ReservationDTO> reservationDTOS = this.mongoTemplate.find(query, ReservationDTO.class);
+        System.out.println("reservationDTOS: " + reservationDTOS.stream().count());
+        return this.mongoTemplate.find(query, ReservationDTO.class);
+    }
+
     private Reservations validateCheckedReservation(final Reservations reservations) {
         LocalDateTime now = LocalDateTime.now();
         if (reservations.isStatus() && now.isAfter(reservations.getEndDate())) {
