@@ -13,7 +13,11 @@ import br.com.fiap.stopcar.service.IReservationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,7 +29,7 @@ import java.util.stream.Collectors;
 public class ReservationServiceImpl implements IReservationService {
 
     private final ReservationRepository reservationRepository;
-
+    private final MongoTemplate mongoTemplate;
     private final ReservationMapper reservationMapper;
 
     @AppError
@@ -67,6 +71,13 @@ public class ReservationServiceImpl implements IReservationService {
         return reservationMapper.toReservationCheckedDTO(reservationValidate);
     }
 
+    @Transactional
+    @Override
+    public ReservationDTO updateReservation(ReservationDTO reservationDTO) {
+        Reservations reservations = reservationMapper.toReservation(reservationDTO);
+        return reservationMapper.toReservationDTO(reservationRepository.save(reservations));
+    }
+
     private Reservations validateCheckedReservation(final Reservations reservations) {
         LocalDateTime now = LocalDateTime.now();
         if (reservations.isStatus() && now.isAfter(reservations.getEndDate())) {
@@ -82,4 +93,6 @@ public class ReservationServiceImpl implements IReservationService {
         return reservationRepository.findById(id)
                 .orElseThrow(() -> new AppException("Não existe uma reserva com o id informado"));
     }
+
+
 }
