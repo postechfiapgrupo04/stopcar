@@ -55,7 +55,7 @@ public class ReservationServiceImpl implements IReservationService {
         return reservationMapper.toReservationDTO(reservationRepository.save(reservations));
     }
 
-    public List<ReservationDTO> getActiveReservations() {
+    public List<ReservationDTO> getActiveReservations() {//TODO alterar para realizar query no banco
         return reservationRepository.findAll().stream()
                 .filter(Reservations::isStatus)
                 .map(reservationMapper::toReservationDTO)
