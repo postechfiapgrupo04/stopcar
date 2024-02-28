@@ -78,6 +78,14 @@ public class ReservationServiceImpl implements IReservationService {
         return reservationMapper.toReservationDTO(reservationRepository.save(reservations));
     }
 
+    @Override
+    public List<ReservationDTO> getReservationsByCarPlate(String plate) {
+        List<Reservations> reservationsByCarPlate = reservationRepository.getReservationsByCarPlate(plate);
+        return reservationsByCarPlate.stream()
+                .map(reservationMapper::toReservationDTO)
+                .collect(Collectors.toList());
+    }
+
     private Reservations validateCheckedReservation(final Reservations reservations) {
         LocalDateTime now = LocalDateTime.now();
         if (reservations.isStatus() && now.isAfter(reservations.getEndDate())) {

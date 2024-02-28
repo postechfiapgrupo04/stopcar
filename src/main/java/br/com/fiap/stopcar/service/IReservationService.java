@@ -13,4 +13,5 @@ public interface IReservationService {
     public List<ReservationDTO> getActiveReservations();
     public ReservationCheckedDTO getReservationChecked(String id) throws AppException;
     public ReservationDTO updateReservation(ReservationDTO reservationDTO);
+    public List<ReservationDTO> getReservationsByCarPlate(String plate);
 }
