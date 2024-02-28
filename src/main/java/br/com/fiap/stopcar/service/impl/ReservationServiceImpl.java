@@ -79,11 +79,11 @@ public class ReservationServiceImpl implements IReservationService {
     }
 
     @Override
-    public List<ReservationDTO> getReservationByCarPlate(String plate) {
-        Query query = new Query(Criteria.where("car.plate").is(plate));
-        List<ReservationDTO> reservationDTOS = this.mongoTemplate.find(query, ReservationDTO.class);
-        System.out.println("reservationDTOS: " + reservationDTOS.stream().count());
-        return this.mongoTemplate.find(query, ReservationDTO.class);
+    public List<ReservationDTO> getReservationsByCarPlate(String plate) {
+        List<Reservations> reservationsByCarPlate = reservationRepository.getReservationsByCarPlate(plate);
+        return reservationsByCarPlate.stream()
+                .map(reservationMapper::toReservationDTO)
+                .collect(Collectors.toList());
     }
 
     private Reservations validateCheckedReservation(final Reservations reservations) {

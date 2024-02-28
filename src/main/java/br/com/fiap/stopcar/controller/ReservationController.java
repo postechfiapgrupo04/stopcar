@@ -52,8 +52,8 @@ public class ReservationController extends AbstractRestController {
     }
 
     @GetMapping("/findByPlate/{plate}")
-    public List<ReservationDTO> getReservationByCarPlate(@PathVariable String plate) {
-        return reservationService.getReservationByCarPlate(plate);
+    public List<ReservationDTO> getReservationsByCarPlate(@PathVariable String plate) {
+        return reservationService.getReservationsByCarPlate(plate);
     }
 
 
