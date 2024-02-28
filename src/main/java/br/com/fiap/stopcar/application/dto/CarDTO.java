@@ -1,16 +1,9 @@
 package br.com.fiap.stopcar.application.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import br.com.fiap.stopcar.domain.enums.CarType;
 
-@Getter
-@Setter
-@AllArgsConstructor
-public class CarDTO {
-    private String id;
-    private String model;
-    private String plate;
-    private String type;
-    public CarDTO() {}
-}
+public record CarDTO (
+    String model,
+    String plate,
+    CarType type
+) {}

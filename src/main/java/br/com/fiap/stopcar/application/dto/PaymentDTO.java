@@ -1,22 +1,18 @@
 package br.com.fiap.stopcar.application.dto;
 
+import br.com.fiap.stopcar.domain.enums.PaymentType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
-@AllArgsConstructor
-public class PaymentDTO {
 
-   private String id;
-   private String type;
-   private String value;
-   private LocalDateTime date;
-   public PaymentDTO() {}
-}
+public record PaymentDTO (
+   PaymentType type,
+   String value,
+   LocalDateTime date
+){}
 
 
 

@@ -26,7 +26,7 @@ public class ReservationController extends AbstractRestController {
     // Controller responsável por retornar uma reserva específica através do id
     @GetMapping("/{id}")
     public ResponseEntity<ReservationDTO> getReservation(@PathVariable("id") String id) throws AppException {
-        return ResponseEntity.ok(reservationService.findById(id));
+        return ResponseEntity.ok(reservationService.getReservationDTOByReservationId(id));
     }
 
     // Controller responsável por salvar uma nova reserva
