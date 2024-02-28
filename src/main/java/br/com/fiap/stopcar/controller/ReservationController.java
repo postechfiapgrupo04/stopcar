@@ -45,4 +45,11 @@ public class ReservationController extends AbstractRestController {
     public ResponseEntity<ReservationCheckedDTO> getReservationChecked(@PathVariable String id) throws AppException {
         return ResponseEntity.ok(reservationService.getReservationChecked(id));
     }
+
+    @PutMapping
+    public ReservationDTO updateReservation(@RequestBody ReservationDTO reservationDTO) {
+        return reservationService.updateReservation(reservationDTO);
+    }
+
+
 }
