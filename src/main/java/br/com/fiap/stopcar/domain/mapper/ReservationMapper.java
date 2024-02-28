@@ -8,8 +8,8 @@ import org.mapstruct.Mapping;
 
 @Mapper
 public interface ReservationMapper {
-    String RESERVATION_VALID_MSG = "Reserva dentro da validade!";
-    String RESERVATION_INVALID_MSG = "Reserva fora da validade!";
+    public static final String RESERVATION_VALID_MSG = "Reserva dentro da validade!";
+    public static final String RESERVATION_INVALID_MSG = "Reserva fora da validade!";
 
     ReservationDTO toReservationDTO(Reservations reservations);
     Reservations toReservation(ReservationDTO reservationDTO);

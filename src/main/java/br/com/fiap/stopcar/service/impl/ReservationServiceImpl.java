@@ -42,7 +42,7 @@ public class ReservationServiceImpl implements IReservationService {
     }
 
     @AppError
-    public ReservationDTO findById(String id) throws AppException {
+    public ReservationDTO getReservationDTOByReservationId(String id) throws AppException {
         return reservationMapper.toReservationDTO(findReservationByIdOrThrows(id));
     }
 

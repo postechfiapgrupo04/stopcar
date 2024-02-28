@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface IReservationService {
     public List<ReservationDTO> getReservation() throws AppException;
-    public ReservationDTO findById(String id) throws AppException;
+    public ReservationDTO getReservationDTOByReservationId(String id) throws AppException;
     public ReservationDTO saveReservation(ReservationDTO reservationDTO);
     public List<ReservationDTO> getActiveReservations();
     public ReservationCheckedDTO getReservationChecked(String id) throws AppException;
