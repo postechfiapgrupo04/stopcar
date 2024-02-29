@@ -52,7 +52,7 @@ public class ReservationController extends AbstractRestController {
     }
 
     @GetMapping("/findByPlate/{plate}")
-    public List<ReservationDTO> getReservationsByCarPlate(@PathVariable String plate) {
+    public List<ReservationDTO> getReservationsByCarPlate(@PathVariable String plate) throws AppException {
         return reservationService.getReservationsByCarPlate(plate);
     }
 
