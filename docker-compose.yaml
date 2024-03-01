@@ -1,0 +1,27 @@
+version: "3.9"
+
+#networks:
+#  stopcar-api-network:
+#    driver: bridge
+
+services:
+  stopcar-mongodb:
+    image: mongo
+    environment:
+      MONGO_INITDB_DATABASE: "stopcar"
+    ports:
+      - "27017:27017"
+#    networks:
+#      - stopcar-api-network
+
+  stopcar-api:
+    image: stopcar-api
+    #command: ["wait-for-it.sh","stopcar-api-network:27017",  "-t", "20", "--","java", "-jar", "stopcar.jar"]
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://stopcar-mongodb:27017/stopcar
+    ports:
+      - "8080:8080"
+#    networks:
+#      - stopcar-api-network
+    depends_on:
+      - stopcar-mongodb
