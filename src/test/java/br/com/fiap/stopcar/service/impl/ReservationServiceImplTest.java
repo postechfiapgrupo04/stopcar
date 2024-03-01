@@ -116,4 +116,22 @@ class ReservationServiceImplTest {
                 .map(ILoggingEvent::getMessage).anyMatch(actualLog -> actualLog.contains(expectedLog))).isTrue();
         verify(reservationRepository, times(1)).save(any(Reservations.class));
     }
+
+    @Test
+    public void shouldGetReservationsByCarPlate() throws AppException {
+        Reservations reservation = buildReservations();
+        when(reservationRepository.getReservationsByCarPlate(reservation.getCar().getPlate())).thenReturn(Collections.singletonList(reservation));
+
+        List<ReservationDTO> result = reservationService.getReservationsByCarPlate(reservation.getCar().getPlate());
+
+        assertNotNull(result);
+        assertFalse(result.isEmpty());
+    }
+
+    @Test
+    void shouldGetReservationsByCarPlateNotFound() throws AppException {
+        String invalidPlate = "999999";
+        when(reservationRepository.getReservationsByCarPlate(invalidPlate)).thenReturn(new ArrayList<>());
+        assertThrows(AppException.class, () -> reservationService.getReservationsByCarPlate(invalidPlate));
+    }
 }
