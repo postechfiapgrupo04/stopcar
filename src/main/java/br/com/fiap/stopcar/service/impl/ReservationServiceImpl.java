@@ -79,11 +79,17 @@ public class ReservationServiceImpl implements IReservationService {
     }
 
     @Override
-    public List<ReservationDTO> getReservationsByCarPlate(String plate) {
+    public List<ReservationDTO> getReservationsByCarPlate(String plate) throws AppException {
         List<Reservations> reservationsByCarPlate = reservationRepository.getReservationsByCarPlate(plate);
-        return reservationsByCarPlate.stream()
+        List<ReservationDTO> reservationDTOS = reservationsByCarPlate.stream()
                 .map(reservationMapper::toReservationDTO)
                 .collect(Collectors.toList());
+
+        if (reservationDTOS.isEmpty()) {
+            throw new AppException("Não existem reservas com a placa informada");
+        }
+
+        return reservationDTOS;
     }
 
     private Reservations validateCheckedReservation(final Reservations reservations) {
