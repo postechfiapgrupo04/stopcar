@@ -22,9 +22,9 @@ public class CacheConfiguration {
         return simpleCacheManager;
     }
 
-    @Bean(CacheConstants.FIND_ALL_RESERVATIONS)
+    @Bean(CacheConstants.FIND_RESERVATION_BY_ID)
     public Cache getDefaultCacheFindAllReservations(final CacheFactory cacheFactory) {
-        return cacheFactory.getCache(CacheConstants.FIND_ALL_RESERVATIONS, THIRTY_MINUTES);
+        return cacheFactory.getCache(CacheConstants.FIND_RESERVATION_BY_ID, THIRTY_MINUTES);
     }
 
 }

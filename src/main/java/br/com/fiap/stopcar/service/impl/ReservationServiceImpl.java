@@ -14,8 +14,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,7 +31,6 @@ public class ReservationServiceImpl implements IReservationService {
     private final ReservationMapper reservationMapper;
 
     @AppError
-    @Cacheable(value = CacheConstants.FIND_ALL_RESERVATIONS)
     public List<ReservationDTO> getReservation() throws AppException {
         List<ReservationDTO> reservation = reservationRepository.findAll()
                 .stream()
@@ -46,17 +43,19 @@ public class ReservationServiceImpl implements IReservationService {
     }
 
     @AppError
+    @Cacheable(value = CacheConstants.FIND_RESERVATION_BY_ID)
     public ReservationDTO getReservationDTOByReservationId(String id) throws AppException {
         return reservationMapper.toReservationDTO(findReservationByIdOrThrows(id));
     }
 
     public ReservationDTO saveReservation(ReservationDTO reservationDTO) {
-        Reservations reservations = reservationMapper.toReservation(reservationDTO);
+        Reservations reservation = reservationMapper.toReservation(reservationDTO);
 
-        if (reservations.getStartDate() != null) {
-            reservations.setEndDate(reservations.getStartDate().plusHours(reservationDTO.totalHours()));
+        if (reservation.getStartDate() != null) {
+            reservation.setEndDate(reservation.getStartDate().plusHours(reservationDTO.totalHours()));
         }
-        return reservationMapper.toReservationDTO(reservationRepository.save(reservations));
+        reservation = reservationRepository.save(reservation);
+        return reservationMapper.toReservationDTO(reservationRepository.save(reservation));
     }
 
     public List<ReservationDTO> getActiveReservations() {//TODO alterar para realizar query no banco
