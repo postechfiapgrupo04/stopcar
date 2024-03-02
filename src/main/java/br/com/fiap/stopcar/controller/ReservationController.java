@@ -7,6 +7,7 @@ import br.com.fiap.stopcar.service.impl.ReservationServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +41,7 @@ public class ReservationController extends AbstractRestController {
     // Controller responsável por salvar uma nova reserva
     @PostMapping
     @Operation(summary = "Salvar reserva", description = "Endpoint para salvar uma nova reserva.")
-    public ResponseEntity<ReservationDTO> saveReservation(
+    public ResponseEntity<ReservationDTO> saveReservation(@Valid
             @Parameter(description = "Detalhes da reserva a ser salva", required = true)
             @RequestBody ReservationDTO reservation) {
         return ResponseEntity.ok(reservationService.saveReservation(reservation));
