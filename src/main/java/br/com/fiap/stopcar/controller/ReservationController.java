@@ -22,14 +22,12 @@ public class ReservationController extends AbstractRestController {
 
     private final ReservationServiceImpl reservationService;
 
-    // Controller responsável por retornar todas as reservas
     @GetMapping
     @Operation(summary = "Obter todas as reservas", description = "Endpoint para obter todas as reservas.")
     public ResponseEntity<List<ReservationDTO>> getReservations() throws AppException {
         return ResponseEntity.ok(reservationService.getReservation());
     }
 
-    // Controller responsável por retornar uma reserva específica através do id
     @GetMapping("/{id}")
     @Operation(summary = "Obter reserva por ID", description = "Endpoint para obter uma reserva específica pelo ID.")
     public ResponseEntity<ReservationDTO> getReservation(
@@ -38,7 +36,6 @@ public class ReservationController extends AbstractRestController {
         return ResponseEntity.ok(reservationService.getReservationDTOByReservationId(id));
     }
 
-    // Controller responsável por salvar uma nova reserva
     @PostMapping
     @Operation(summary = "Salvar reserva", description = "Endpoint para salvar uma nova reserva.")
     public ResponseEntity<ReservationDTO> saveReservation(@Valid
@@ -47,7 +44,6 @@ public class ReservationController extends AbstractRestController {
         return ResponseEntity.ok(reservationService.saveReservation(reservation));
     }
 
-    // Controller responsável por retornar todas as reservas ativas
     @GetMapping("/ativas")
     @Operation(summary = "Obter reservas ativas", description = "Endpoint para obter todas as reservas ativas.")
     public ResponseEntity<List<ReservationDTO>> getActiveReservations() {
