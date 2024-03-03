@@ -50,7 +50,7 @@ O seguintes passos descrevem como clonar o projeto, rodar e também como constru
    http://localhost:8080/swagger-ui/index.html#/
    ```
 ### Contribuição
-Pensando em facilitar a contribuição este softawre esta utilizando o docker-file-maven-plugin que automatiza o empacotamento e construção da imagem docker.
+Pensando em facilitar a contribuição com este software estamos utilizando o docker-file-maven-plugin que automatiza o empacotamento e construção da imagem docker.
 1. Realizando empacotamento e build da imagem
    ```
    ./mvnw package -Pprofile-docker -f pom.xml
