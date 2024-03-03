@@ -32,11 +32,11 @@ O STOPCAR é um software desenvolvido para gerenciar sistemas de parquímetros d
 
 O seguintes passos descrevem como clonar o projeto, rodar e também como construir para contribuir com o desenvolvimento.
 
-### Prerequisites
+### Pré-requisitos
 
 É necessario ter instalado java versão a partir da 17, Maven, Docker.
 
-### Installation
+### Instalação
 1. Clone o repositório
    ```
    git clone https://github.com/postechfiapgrupo04/stopcar.git
