@@ -4,6 +4,7 @@ package br.com.fiap.stopcar.service.impl;
 import br.com.fiap.stopcar.application.annotations.AppError;
 import br.com.fiap.stopcar.application.dto.ReservationCheckedDTO;
 import br.com.fiap.stopcar.application.dto.ReservationDTO;
+import br.com.fiap.stopcar.application.dto.ReservationsCheckedTotalDTO;
 import br.com.fiap.stopcar.application.exceptions.AppException;
 import br.com.fiap.stopcar.domain.constants.CacheConstants;
 import br.com.fiap.stopcar.domain.entities.Reservations;
@@ -26,6 +27,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ReservationServiceImpl implements IReservationService {
 
+    public static final int VALOR_DEFAULT = 7;
     private final ReservationRepository reservationRepository;
     private final MongoTemplate mongoTemplate;
     private final ReservationMapper reservationMapper;
@@ -54,6 +56,13 @@ public class ReservationServiceImpl implements IReservationService {
         if (reservation.getStartDate() != null) {
             reservation.setEndDate(reservation.getStartDate().plusHours(reservationDTO.totalHours()));
         }
+        reservation.setStatus(true);
+
+        //calcular a payment
+        reservation.getPayment().setValue((double) (reservation.getTotalHours() * VALOR_DEFAULT));
+        reservation.getPayment().setDate(reservation.getStartDate());
+
+
         reservation = reservationRepository.save(reservation);
         return reservationMapper.toReservationDTO(reservationRepository.save(reservation));
     }
@@ -89,6 +98,14 @@ public class ReservationServiceImpl implements IReservationService {
         }
 
         return reservationDTOS;
+    }
+
+    @Override
+    public ReservationsCheckedTotalDTO checkAllReservation() {
+        List<Reservations> reservationsExpired = reservationRepository.findByStatusIsFalseAndEndDateBefore(LocalDateTime.now())
+                .stream().peek(reservation -> reservation.setStatus(false)).toList();
+        log.info("Total de reservas expiradas {}.", reservationsExpired.size());
+        return new ReservationsCheckedTotalDTO(reservationRepository.saveAll(reservationsExpired).size());
     }
 
     private Reservations validateCheckedReservation(final Reservations reservations) {

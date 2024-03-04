@@ -2,6 +2,7 @@ package br.com.fiap.stopcar.controller;
 
 import br.com.fiap.stopcar.application.dto.ReservationCheckedDTO;
 import br.com.fiap.stopcar.application.dto.ReservationDTO;
+import br.com.fiap.stopcar.application.dto.ReservationsCheckedTotalDTO;
 import br.com.fiap.stopcar.application.exceptions.AppException;
 import br.com.fiap.stopcar.service.impl.ReservationServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
@@ -56,6 +57,13 @@ public class ReservationController extends AbstractRestController {
             @Parameter(description = "ID da reserva a ser verificada", required = true)
             @PathVariable String id) throws AppException {
         return ResponseEntity.ok(reservationService.getReservationChecked(id));
+    }
+
+    @PostMapping("/checar/todas")
+    @Operation(summary = "Verificar todas as reservas e setar para expiradas quando tiver fora do prazo de validade",
+            description = "Endpoint para verificar e setar como expirado todas as reservas com prazo fora da validade.")
+    public ResponseEntity<ReservationsCheckedTotalDTO> checkAllReservations() throws AppException {
+        return ResponseEntity.ok(reservationService.checkAllReservation());
     }
 
     @PutMapping

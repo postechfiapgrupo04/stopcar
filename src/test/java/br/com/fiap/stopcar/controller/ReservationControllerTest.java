@@ -5,9 +5,10 @@ import br.com.fiap.stopcar.application.dto.PaymentDTO;
 import br.com.fiap.stopcar.application.dto.ReservationDTO;
 import br.com.fiap.stopcar.domain.enums.CarType;
 import br.com.fiap.stopcar.domain.enums.PaymentType;
+import br.com.fiap.stopcar.repository.ReservationRepository;
 import br.com.fiap.stopcar.service.impl.ReservationServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule; // Adicionado
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -19,12 +20,13 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.hamcrest.Matchers.*;
 
 @WebMvcTest(ReservationController.class)
 public class ReservationControllerTest {
@@ -34,6 +36,9 @@ public class ReservationControllerTest {
 	
 	@MockBean
 	private ReservationServiceImpl reservationService;
+
+	@MockBean
+	private ReservationRepository reservationRepository;
 	
 	private ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule()); // Registrando o módulo
 	
@@ -146,5 +151,14 @@ public class ReservationControllerTest {
 				.andExpect(jsonPath("$", hasSize(1)))
 				.andExpect(jsonPath("$[0].car.plate", is(plate)));
 	}
+
+//	@Test
+//	void checkAllReservations_ReturnsReservationsExpired() throws Exception {
+//		when(reservationService.checkAllReservation()).thenReturn(new ReservationsCheckedTotalDTO(1));
+//		mockMvc.perform(post("/checar/todas").contentType(MediaType.APPLICATION_JSON))
+//				.andExpect(status().isOk())
+//				.andExpect(jsonPath("$", hasSize(1)))
+//				.andExpect(jsonPath("$total", is(1)));
+//	}
 	
 }

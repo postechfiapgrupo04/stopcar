@@ -2,6 +2,7 @@ package br.com.fiap.stopcar.service.impl;
 
 import br.com.fiap.stopcar.application.dto.ReservationCheckedDTO;
 import br.com.fiap.stopcar.application.dto.ReservationDTO;
+import br.com.fiap.stopcar.application.dto.ReservationsCheckedTotalDTO;
 import br.com.fiap.stopcar.application.exceptions.AppException;
 import br.com.fiap.stopcar.domain.entities.Reservations;
 import br.com.fiap.stopcar.domain.mapper.ReservationMapper;
@@ -10,6 +11,7 @@ import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.read.ListAppender;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,10 +20,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.util.*;
 
 import static br.com.fiap.stopcar.factory.ReservationsFactory.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -133,5 +133,15 @@ class ReservationServiceImplTest {
         String invalidPlate = "999999";
         when(reservationRepository.getReservationsByCarPlate(invalidPlate)).thenReturn(new ArrayList<>());
         assertThrows(AppException.class, () -> reservationService.getReservationsByCarPlate(invalidPlate));
+    }
+    @Test
+    void shouldVerifyCheckAllReservationsExpireds() {
+        List<Reservations> reservationsExperid = Collections.singletonList(buildReservations());
+        when(reservationRepository.findByStatusIsFalseAndEndDateBefore(any(LocalDateTime.class)))
+                .thenReturn(reservationsExperid);
+
+        ReservationsCheckedTotalDTO reservationsCheckedTotalDTO = reservationService.checkAllReservation();
+        Assertions.assertNotNull(reservationsCheckedTotalDTO);
+        verify(reservationRepository, times(1)).saveAll(reservationsExperid);
     }
 }

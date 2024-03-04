@@ -12,6 +12,6 @@ import java.time.LocalDateTime;
 @Builder
 public class Payments {
     private Double value;
-    private LocalDateTime paymentDate;
-    private PaymentType paymentType;
+    private LocalDateTime date;
+    private PaymentType type;
 }
