@@ -58,7 +58,7 @@ Pensando em facilitar a contribuição com este software estamos utilizando o do
 obs: Caso queira seguir o procedimento padrao de construção da imagem docker basta não informar o seguinte parametro: -Pprofile-docker 
 <!-- USAGE EXAMPLES -->
 ## Usando
-Para utilizar a nossa API basta subir a aplicacão e seguir para o passo 3 do topico de Instalação. Pois a mesma dispõe de [documentão](http://localhost:8080/swagger-ui/index.html#/) ampla através do OpenApi Documentation, mas segue também a [coleção](collection-api/[stopcar-api.postman_collection.json](collection-api%2Fstopcar-api.postman_collection.json)) para o uso em ferramtas de teste de API.
+Para utilizar a nossa API basta subir a aplicacão e seguir para o passo 3 do topico de Instalação. Pois a mesma dispõe de [documentão](http://localhost:8080/swagger-ui/index.html#/) ampla através do OpenApi Documentation, mas segue também a [coleção](collection-api/stopcar-api.postman_collection.json(collection-api%2Fstopcar-api.postman_collection.json)) para o uso em ferramtas de teste de API.
 
 <!-- CONTRIBUTING -->
 ## Contribuindo
