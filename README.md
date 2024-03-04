@@ -75,6 +75,7 @@ Se você tiver uma sugestão que possa melhorar isso, bifurque o repositório e 
 ## Contato
 
 Milton Willamis da Silva - milton.willamis.silva@gmail.com
+Bruno Eduardo Martins Rosselli - bruno.rosselli@hotmail.com
 
 Project Link: [https://github.com/postechfiapgrupo04/stopcar](https://github.com/postechfiapgrupo04/stopcar)
 
