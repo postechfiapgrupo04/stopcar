@@ -30,7 +30,7 @@ O STOPCAR é um software desenvolvido para gerenciar sistemas de parquímetros d
 <!-- GETTING STARTED -->
 ## Getting Started
 
-O seguintes passos descrevem como clonar o projeto, rodar e também como construir para contribuir com o desenvolvimento.
+O seguintes passos descrevem como clonar o projeto, rodar e também construir a imagem para contribuir com o desenvolvimento.
 
 ### Pré-requisitos
 
