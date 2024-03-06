@@ -14,5 +14,5 @@ public interface ReservationRepository extends MongoRepository<Reservations, Str
     @Query("{'car.plate': '?0'}")
     public List<Reservations> getReservationsByCarPlate(String plate);
 
-    public List<Reservations> findByStatusIsFalseAndEndDateBefore(LocalDateTime now);
+    public List<Reservations> findByStatusIsTrueAndEndDateBefore(LocalDateTime now);
 }
