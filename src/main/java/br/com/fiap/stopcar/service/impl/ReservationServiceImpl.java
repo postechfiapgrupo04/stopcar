@@ -102,7 +102,7 @@ public class ReservationServiceImpl implements IReservationService {
 
     @Override
     public ReservationsCheckedTotalDTO checkAllReservation() {
-        List<Reservations> reservationsExpired = reservationRepository.findByStatusIsFalseAndEndDateBefore(LocalDateTime.now())
+        List<Reservations> reservationsExpired = reservationRepository.findByStatusIsTrueAndEndDateBefore(LocalDateTime.now())
                 .stream().peek(reservation -> reservation.setStatus(false)).toList();
         log.info("Total de reservas expiradas {}.", reservationsExpired.size());
         return new ReservationsCheckedTotalDTO(reservationRepository.saveAll(reservationsExpired).size());

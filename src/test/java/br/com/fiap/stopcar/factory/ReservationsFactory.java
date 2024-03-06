@@ -36,6 +36,7 @@ public class ReservationsFactory {
                 builCarsDTO(),
                 buildReservations().getLocation(),
                 buildReservations().getStartDate(),
+                buildReservations().getEndDate(),
                 buildReservations().getTotalHours(),
                 buildReservations().isStatus(),
                 buildPaymentDTO()

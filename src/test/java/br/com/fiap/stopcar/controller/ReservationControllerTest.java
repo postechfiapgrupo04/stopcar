@@ -54,7 +54,7 @@ public class ReservationControllerTest {
 	void getReservations_ReturnsListOfReservations() throws Exception {
 		CarDTO carDTO = new CarDTO("Modelo Teste", "ABC1234", CarType.SUV);
 		PaymentDTO paymentDTO = new PaymentDTO(PaymentType.CREDIT_CARD, "100.00", LocalDateTime.now());
-		ReservationDTO reservationDTO = new ReservationDTO("1", carDTO, "Local Teste", LocalDateTime.now(), 2L, true, paymentDTO);
+		ReservationDTO reservationDTO = new ReservationDTO("1", carDTO, "Local Teste", LocalDateTime.now(),  LocalDateTime.now().plusHours(2),2L, true, paymentDTO);
 		
 		List<ReservationDTO> reservations = Arrays.asList(reservationDTO);
 		when(reservationService.getReservation()).thenReturn(reservations);
@@ -74,7 +74,7 @@ public class ReservationControllerTest {
 	void getReservationById_ReturnsReservation() throws Exception {
 		CarDTO carDTO = new CarDTO("Modelo Teste", "ABC1234", CarType.SUV);
 		PaymentDTO paymentDTO = new PaymentDTO(PaymentType.CREDIT_CARD, "100.00", LocalDateTime.now());
-		ReservationDTO reservationDTO = new ReservationDTO("1", carDTO, "Local Teste", LocalDateTime.now(), 2L, true, paymentDTO);
+		ReservationDTO reservationDTO = new ReservationDTO("1", carDTO, "Local Teste", LocalDateTime.now(),  LocalDateTime.now().plusHours(2),  2L, true, paymentDTO);
 		
 		when(reservationService.getReservationDTOByReservationId("1")).thenReturn(reservationDTO);
 		
@@ -89,8 +89,8 @@ public class ReservationControllerTest {
 	void saveReservation_ReturnsSavedReservation() throws Exception {
 		CarDTO carDTO = new CarDTO("Modelo Teste", "ABC1234", CarType.SUV);
 		PaymentDTO paymentDTO = new PaymentDTO(PaymentType.CREDIT_CARD, "100.00", LocalDateTime.now());
-		ReservationDTO newReservation = new ReservationDTO(null, carDTO, "Local Teste", LocalDateTime.now(), 2L, true, paymentDTO);
-		ReservationDTO savedReservation = new ReservationDTO("1", carDTO, "Local Teste", LocalDateTime.now(), 2L, true, paymentDTO);
+		ReservationDTO newReservation = new ReservationDTO(null, carDTO, "Local Teste", LocalDateTime.now(), LocalDateTime.now().plusHours(2),2L, true, paymentDTO);
+		ReservationDTO savedReservation = new ReservationDTO("1", carDTO, "Local Teste", LocalDateTime.now(), LocalDateTime.now().plusHours(2),2L, true, paymentDTO);
 		
 		when(reservationService.saveReservation(any(ReservationDTO.class))).thenReturn(savedReservation);
 		
@@ -105,7 +105,7 @@ public class ReservationControllerTest {
 	void getActiveReservations_ReturnsActiveReservations() throws Exception {
 		CarDTO carDTO = new CarDTO("Modelo Teste", "DEF5678", CarType.SEDAN);
 		PaymentDTO paymentDTO = new PaymentDTO(PaymentType.DEBIT_CARD, "200.00", LocalDateTime.now());
-		ReservationDTO activeReservation = new ReservationDTO("2", carDTO, "Local Ativo Teste", LocalDateTime.now(), 3L, true, paymentDTO);
+		ReservationDTO activeReservation = new ReservationDTO("2", carDTO, "Local Ativo Teste", LocalDateTime.now(), LocalDateTime.now().plusHours(2),3L, true, paymentDTO);
 		
 		List<ReservationDTO> activeReservations = Arrays.asList(activeReservation);
 		
@@ -122,7 +122,7 @@ public class ReservationControllerTest {
 	void updateReservation_ReturnsUpdatedReservation() throws Exception {
 		CarDTO carDTO = new CarDTO("Modelo Atualizado", "GHI9012", CarType.SEDAN);
 		PaymentDTO paymentDTO = new PaymentDTO(PaymentType.DEBIT_CARD, "300.00", LocalDateTime.now());
-		ReservationDTO updatedReservation = new ReservationDTO("3", carDTO, "Local Atualizado Teste", LocalDateTime.now(), 4L, false, paymentDTO);
+		ReservationDTO updatedReservation = new ReservationDTO("3", carDTO, "Local Atualizado Teste", LocalDateTime.now(), LocalDateTime.now().plusHours(2),4L, false, paymentDTO);
 		
 		when(reservationService.updateReservation(any(ReservationDTO.class))).thenReturn(updatedReservation);
 		
@@ -138,7 +138,7 @@ public class ReservationControllerTest {
 	void getReservationsByCarPlate_ReturnsReservations() throws Exception {
 		CarDTO carDTO = new CarDTO("Modelo Por Placa", "JKL3456", CarType.PICKUP);
 		PaymentDTO paymentDTO = new PaymentDTO(PaymentType.CREDIT_CARD, "400.00", LocalDateTime.now());
-		ReservationDTO reservationByPlate = new ReservationDTO("4", carDTO, "Local Por Placa Teste", LocalDateTime.now(), 5L, true, paymentDTO);
+		ReservationDTO reservationByPlate = new ReservationDTO("4", carDTO, "Local Por Placa Teste", LocalDateTime.now(), LocalDateTime.now().plusHours(2),5L, true, paymentDTO);
 		
 		List<ReservationDTO> reservationsByPlate = Arrays.asList(reservationByPlate);
 		String plate = "JKL3456";

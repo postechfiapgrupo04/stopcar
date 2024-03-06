@@ -137,7 +137,7 @@ class ReservationServiceImplTest {
     @Test
     void shouldVerifyCheckAllReservationsExpireds() {
         List<Reservations> reservationsExperid = Collections.singletonList(buildReservations());
-        when(reservationRepository.findByStatusIsFalseAndEndDateBefore(any(LocalDateTime.class)))
+        when(reservationRepository.findByStatusIsTrueAndEndDateBefore(any(LocalDateTime.class)))
                 .thenReturn(reservationsExperid);
 
         ReservationsCheckedTotalDTO reservationsCheckedTotalDTO = reservationService.checkAllReservation();

@@ -24,6 +24,7 @@ public record ReservationDTO(
         @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
         @NotNull(message="Data de início não pode ser nula")
         LocalDateTime startDate,
+        LocalDateTime endDate,
         @Schema(description = "Total de horas da reserva")
         @NotNull(message="Total de horas não pode ser nulo")
         Long totalHours,
