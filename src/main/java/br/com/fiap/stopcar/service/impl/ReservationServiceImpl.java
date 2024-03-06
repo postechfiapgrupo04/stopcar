@@ -74,6 +74,17 @@ public class ReservationServiceImpl implements IReservationService {
                 .collect(Collectors.toList());
     }
 
+    public List<ReservationDTO> postActiveReservations() {
+        return reservationRepository.findAll().stream()
+                .filter(reservation -> LocalDateTime.now().isAfter(reservation.getEndDate()))
+                .map(reservation -> {
+                    reservation.setStatus(false); // Altera o status para false
+                    reservationRepository.save(reservation); // Salva as alterações no banco de dados
+                    return reservationMapper.toReservationDTO(reservation);
+                })
+                .collect(Collectors.toList());
+    }
+
     public ReservationCheckedDTO getReservationChecked(String id) throws AppException {
         Reservations reservationValidate = validateCheckedReservation(findReservationByIdOrThrows(id));
         return reservationMapper.toReservationCheckedDTO(reservationValidate);

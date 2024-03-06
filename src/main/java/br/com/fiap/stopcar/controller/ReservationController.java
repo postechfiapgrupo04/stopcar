@@ -59,6 +59,12 @@ public class ReservationController extends AbstractRestController {
         return ResponseEntity.ok(reservationService.getReservationChecked(id));
     }
 
+    @PostMapping("/validAllStatus")
+    @Operation(summary = "Verificar reserva", description = "Endpoint para verificar todas as reservas.")
+    public ResponseEntity<List<ReservationDTO>> postActiveReservations() {
+        return ResponseEntity.ok(reservationService.postActiveReservations());
+    }
+
     @PostMapping("/checar/todas")
     @Operation(summary = "Verificar todas as reservas e setar para expiradas quando tiver fora do prazo de validade",
             description = "Endpoint para verificar e setar como expirado todas as reservas com prazo fora da validade.")
