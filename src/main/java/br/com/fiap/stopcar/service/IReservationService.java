@@ -10,7 +10,7 @@ import java.util.List;
 public interface IReservationService {
     public List<ReservationDTO> getReservation() throws AppException;
     public ReservationDTO getReservationDTOByReservationId(String id) throws AppException;
-    public ReservationDTO saveReservation(ReservationDTO reservationDTO);
+    public ReservationDTO saveReservation(ReservationDTO reservationDTO) throws AppException;
     public List<ReservationDTO> getActiveReservations();
     public ReservationCheckedDTO getReservationChecked(String id) throws AppException;
     public ReservationDTO updateReservation(ReservationDTO reservationDTO);

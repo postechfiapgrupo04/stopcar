@@ -6,14 +6,11 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 public record CarDTO(
-        @NotNull(message="Modelo não pode ser nulo")
-        @NotEmpty(message="Modelo não pode ser vazio")
+        @NotBlank(message="Modelo não pode ser vazio")
         String model,
-        @NotNull(message="Placa não pode ser nula")
-        @NotEmpty(message="Placa não pode ser vazia")
+        @NotBlank(message="Placa não pode ser vazia")
         String plate,
-        @NotNull(message="Tipo não pode ser nulo")
-        @NotEmpty(message="Tipo não pode ser vazio")
+        @NotBlank(message="Tipo não pode ser vazio")
         CarType type
 ) {
 }

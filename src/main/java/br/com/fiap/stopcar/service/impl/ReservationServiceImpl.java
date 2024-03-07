@@ -50,10 +50,18 @@ public class ReservationServiceImpl implements IReservationService {
         return reservationMapper.toReservationDTO(findReservationByIdOrThrows(id));
     }
 
-    public ReservationDTO saveReservation(ReservationDTO reservationDTO) {
+    public ReservationDTO saveReservation(ReservationDTO reservationDTO) throws AppException {
         Reservations reservation = reservationMapper.toReservation(reservationDTO);
 
+        if (reservation.getPayment().getType() == null || reservation.getPayment().getType().equals(""))
+            throw new AppException("O método de pagamento precisa ser informado");
+
         if (reservation.getStartDate() != null) {
+            if (reservation.getStartDate().isBefore(LocalDateTime.now()))
+                throw new AppException("O início da reserva não pode ser antes da data atual.");
+            if (reservation.getStartDate().isAfter(LocalDateTime.now().plusHours(24)))
+                throw new AppException("O início da reserva não pode ser depois de 24 horas da data atual.");
+
             reservation.setEndDate(reservation.getStartDate().plusHours(reservationDTO.totalHours()));
         }
         reservation.setStatus(true);

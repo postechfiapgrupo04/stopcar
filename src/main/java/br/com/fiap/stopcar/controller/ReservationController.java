@@ -41,7 +41,7 @@ public class ReservationController extends AbstractRestController {
     @Operation(summary = "Salvar reserva", description = "Endpoint para salvar uma nova reserva.")
     public ResponseEntity<ReservationDTO> saveReservation(@Valid
             @Parameter(description = "Detalhes da reserva a ser salva", required = true)
-            @RequestBody ReservationDTO reservation) {
+            @RequestBody ReservationDTO reservation) throws AppException {
         return ResponseEntity.ok(reservationService.saveReservation(reservation));
     }
 

@@ -9,13 +9,12 @@ import java.time.LocalDateTime;
 
 
 public record PaymentDTO(
-        @NotNull(message="Tipo de pagamento não pode ser nulo")
-        @NotEmpty(message="Tipo de pagamento não pode ser vazio")
+        @NotBlank(message="Tipo de pagamento não pode ser vazio")
         PaymentType type,
-        @NotNull(message="Valor não pode ser nulo")
-        @NotEmpty(message="Valor não pode ser vazio")
+        @NotBlank(message="Valor não pode ser vazio")
         String value,
         @NotNull(message="Data não pode ser nula")
+        @NotEmpty(message="Data não pode ser nula")
         LocalDateTime date
 ) {
 }
