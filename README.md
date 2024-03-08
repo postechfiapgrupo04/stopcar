@@ -62,9 +62,6 @@ obs: Caso queira seguir o procedimento padrao de construção da imagem docker b
 ## Usando
 Para utilizar a nossa API basta subir a aplicacão e seguir para o passo 3 do topico de Instalação. Pois a mesma dispõe de [documentão](http://localhost:8080/swagger-ui/index.html#/) ampla através do OpenApi Documentation, mas segue também a coleção que está dentro da pasta \stopcar\collection-api para o uso em ferrametas de teste de API.
 
-## Observações
-Na versão atual, as APIs fazem algumas validações baseadas no horário do sistema. Portanto, quando executado via docker você deve verificar em qual horário está aquele container. 
-
 <!-- CONTRIBUTING -->
 ## Contribuindo
 
