@@ -15,7 +15,7 @@ services:
 #      - stopcar-api-network
 
   stopcar-api:
-    image: stopcar-api
+    image: miltonx/stopcar-api
     #command: ["wait-for-it.sh","stopcar-api-network:27017",  "-t", "20", "--","java", "-jar", "stopcar.jar"]
     environment:
       SPRING_DATA_MONGODB_URI: mongodb://stopcar-mongodb:27017/stopcar
