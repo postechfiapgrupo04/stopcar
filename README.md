@@ -73,6 +73,25 @@ Se você tiver uma sugestão que possa melhorar isso, bifurque o repositório e 
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
+## Observações
+
+Alguns payloads no Swagger não estão atualizados.
+Para fazer o POST e criar uma nova reserva, use o seguinte modelo: 
+
+{
+    "car": {
+        "model": "Civic",
+        "plate": "123abc",
+        "type": "SEDAN"
+    },
+    "location": "Av. Paulista, 123",
+    "startDate": "2024-03-08T20:56:00",
+    "totalHours": 2,
+    "payment": {
+        "type": "CREDIT_CARD"
+    }
+}
+
 <!-- CONTACT -->
 ## Contato
 
