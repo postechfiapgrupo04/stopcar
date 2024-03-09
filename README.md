@@ -77,7 +77,7 @@ Se você tiver uma sugestão que possa melhorar isso, bifurque o repositório e 
 
 Alguns payloads no Swagger não estão atualizados.
 Para fazer o POST e criar uma nova reserva, use o seguinte modelo: 
-
+```json
 {
     "car": {
         "model": "Civic",
@@ -91,7 +91,7 @@ Para fazer o POST e criar uma nova reserva, use o seguinte modelo:
         "type": "CREDIT_CARD"
     }
 }
-
+```
 <!-- CONTACT -->
 ## Contato
 
