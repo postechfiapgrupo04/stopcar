@@ -22,11 +22,11 @@ O STOPCAR é um software desenvolvido para gerenciar sistemas de parquímetros d
 https://github.com/postechfiapgrupo04/stopcar
 
 ### Tecnologias
-* springboot 
-* mongodb
-* maven
-* caffeine cache
-* Docker
+* Spring Boot - Framework Java para criação de aplicações web, rápido e fácil de configurar. Deveria ser usado para agilizar o desenvolvimento de aplicações Java. 
+* MongoDB - Banco de dados NoSQL escalável, flexível e de alta performance. Deveria ser usado para aplicações que necessitam de um banco de dados não relacional.
+* Maven - Gerenciador de dependências e build em Java. Deveria ser usado para gerenciar as dependências e automatizar o processo de build de um projeto.
+* Caffeine Cache - Biblioteca de caching eficiente para aplicações Java. Deveria ser usado para melhorar a performance de consultas repetitivas em aplicações.
+* Docker - Plataforma para criação, implantação e execução de aplicações em contêineres. Deveria ser usado para facilitar a distribuição e implantação de aplicações em diferentes ambientes.
 
 
 <!-- GETTING STARTED -->
