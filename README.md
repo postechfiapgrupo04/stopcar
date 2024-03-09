@@ -22,7 +22,7 @@ O STOPCAR é um software desenvolvido para gerenciar sistemas de parquímetros d
 https://github.com/postechfiapgrupo04/stopcar
 
 ### Tecnologias
-* springboot
+* springboot 
 * mongodb
 * maven
 * caffeine cache
@@ -92,6 +92,12 @@ Para fazer o POST e criar uma nova reserva, use o seguinte modelo:
     }
 }
 ```
+
+## Dificuldades
+
+### Entender como mudar o Time Zone no Docker:
+Solução alterar o Docker Composer.
+  
 <!-- CONTACT -->
 ## Contato
 
